@@ -3,15 +3,24 @@
 
 </head>
 <body>
-    <h1>Hello World</h1>
-    <p>This is Lisa's first dynamic webpage</p>
+    <h1>Hello user!</h1>
+    <p>Welcome to my shop! Currently the selection is limited, but new items and functionalities are going to available soon!</p>
+    <p>Please enter your name and choose your favorite color.</p>
 
-    <form action="/submit" method="post">
+    <form action="/shop" method="post">
         <label for="namefield">Name:</label>
-        <input type="text" id="namefield" name="name">
-        <label for="agefield">Age:</label>
-        <input type="number" id="agefield" name="age">
-        <input type="submit" value="Submit">
+        <input type="text" id="namefield" name="name" required>
+        <br>
+        <label for="colorfield">Select your favorite color:</label>
+        <select id="colorfield" name="color" required>
+            <option value="LightPink">Pink</option>
+            <option value="MediumSlateBlue">Purple</option>
+            <option value="Red">Red</option>
+            <option value="MediumBlue">Blue</option>
+            <option value="LimeGreen">Green</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Go to shop">
     </form>
 
 </body>
