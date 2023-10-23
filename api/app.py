@@ -30,13 +30,16 @@ def checkout():
                            item=input_item, quantity=input_quantity)
 
 
-@app.route("/query", methods=["GET"])
-def process_query(query=None):
-
-    if query is None:
-        query = request.args.get('q')
-
+def process_query(query):
     if query == "dinosaurs":
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif query == 'asteroids':
         return "Unknown"
+    
+
+@app.route("/query", methods=["GET"])
+def queryHandler():
+    query = request.args.get('q')
+    
+    return process_query(query)
+
