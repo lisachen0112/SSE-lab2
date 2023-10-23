@@ -28,3 +28,15 @@ def checkout():
     return render_template("checkout.html",
                            name=input_name, color=input_color,
                            item=input_item, quantity=input_quantity)
+
+
+@app.route("/query", methods=["GET"])
+def process_query(query=None):
+    
+    if query == None:
+        query = request.args.get('q')
+
+    if query == "dinosaurs":
+        return "Dinosaurs ruled the Earth 200 million years ago"
+    elif query == 'asteroids':
+        return "Unknown"
