@@ -26,5 +26,5 @@ def checkout():
     input_quantity = request.form.get('quantity')
 
     return render_template("checkout.html",
-    name=input_name, color=input_color,
+                           name=input_name, color=input_color,
                            item=input_item, quantity=input_quantity)
