@@ -31,15 +31,15 @@ def checkout():
 
 
 def process_query(query):
+
     if query == "dinosaurs":
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif query == 'asteroids':
         return "Unknown"
-    
+
 
 @app.route("/query", methods=["GET"])
 def queryHandler():
     query = request.args.get('q')
-    
-    return process_query(query)
 
+    return process_query(query)
