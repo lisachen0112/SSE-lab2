@@ -32,8 +32,8 @@ def checkout():
 
 @app.route("/query", methods=["GET"])
 def process_query(query=None):
-    
-    if query == None:
+
+    if query is None:
         query = request.args.get('q')
 
     if query == "dinosaurs":
