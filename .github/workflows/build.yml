@@ -45,7 +45,7 @@ jobs:
           vercel-args: '--prod'
 
   email-confirmation:
-    needs: deploy_to_vercel
+    needs: deploy-to-vercel
     runs-on: ubuntu-latest
     steps:
       - name: Send-Mail
