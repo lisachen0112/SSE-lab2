@@ -59,12 +59,23 @@ jobs:
     - name: Run coverage 
       run: coverage run -m pytest api/*.py 
     - name: Coverage report
-      run: coverage report > coverage.txt     
+      run: coverage report > coverage.txt
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: coverage.txt     
 
   email-confirmation:
     needs: [deploy-to-vercel, coverage-report]
     runs-on: ubuntu-latest
     steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+          path: .
+
       - name: Send-Mail
         uses: dawidd6/action-send-mail@v3
         with:
