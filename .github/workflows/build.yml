@@ -75,7 +75,6 @@ jobs:
         with:
           name: my-artifact
           path: .
-
       - name: Send-Mail
         uses: dawidd6/action-send-mail@v3
         with:
@@ -84,15 +83,11 @@ jobs:
           secure: true
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions - Build Sucessful
-          to: jamiehelsby@gmail.com
-          # lc1323@ic.ac.uk
+          subject: SSE Lab3 - Github Actions
+          to: rbc@imperial.ac.uk
           from: Jamie Helsby
-          body: Build job of ${{github.repository}} completed successfully!
-          # cc: jamiehelsby@gmail.com,lc1323@ic.ac.uk
+          body: Build job of ${{github.repository}} completed successfully! Please find attached the coverage report. 
+          cc: jjh17@ic.ac.uk, lc1323@ic.ac.uk
           ignore_cert: true
-          # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
-          # Optional priority: 'high', 'normal' (default) or 'low'
-          priority: normal
           attachments: coverage.txt
