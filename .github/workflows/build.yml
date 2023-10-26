@@ -44,8 +44,25 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
 
+  coverage-report:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run coverage 
+      run: coverage run -m pytest api/*.py 
+    - name: Coverage report
+      run: coverage report > coverage.txt     
+
   email-confirmation:
-    needs: deploy-to-vercel
+    needs: [deploy-to-vercel, coverage-report]
     runs-on: ubuntu-latest
     steps:
       - name: Send-Mail
@@ -67,3 +84,4 @@ jobs:
           convert_markdown: true
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: normal
+          attachments: coverage.txt
