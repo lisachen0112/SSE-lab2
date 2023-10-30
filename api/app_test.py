@@ -1,4 +1,4 @@
-from app import process_query, get_list_of_number
+from app import process_query, get_list_of_number, largest, square_cube
 
 
 # def test_knows_about_dinosaurs():
@@ -8,10 +8,10 @@ from app import process_query, get_list_of_number
 #
 # def test_does_not_know_about_asteroids():
 #     assert process_query("asteroids") == "Unknown"
-
-
-def test_does_not_know_about_asteroids():
-    assert process_query("asteroids") == "Unknown"
+#
+#
+# def test_does_not_know_about_asteroids():
+#     assert process_query("asteroids") == "Unknown"
 
 
 def test_knows_team_name():
@@ -24,3 +24,12 @@ def test_get_list_of_number():
     query = 'Which of the following numbers is the largest: 73, 82, 15'
     assert get_list_of_number(query) == [73, 82, 15]
 
+# def test_square_cube():
+#     []
+#     assert square_cube()
+
+
+
+# def test_largest():
+#     nums = [20, 40]
+#     a

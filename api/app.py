@@ -52,9 +52,25 @@ def product(nums):
     return str(np.prod(nums))
 
 
+def is_cube(n):
+    cube_root = n**(1./3.)
+    if round(cube_root) ** 3 == n:
+        return True
+    else:
+        return False
+
+
+def is_square(n):
+    cube_root = n**(1./2.)
+    if round(cube_root) ** 2 == n:
+        return True
+    else:
+        return False
+
+
 def square_cube(nums):
     for i in nums:
-        if (np.sqrt(i) % 1 == 0) and (np.cbtr(i) % 1 == 0):
+        if (is_cube(i)) and (is_square(i)):
             return str(i)
 
 
