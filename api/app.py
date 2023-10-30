@@ -52,6 +52,12 @@ def product(nums):
     return str(np.prod(nums))
 
 
+def square_cube(nums):
+    for i in nums:
+        if (np.sqrt(i) % 1 == 0) and (np.cbtr(i) % 1 == 0):
+            return str(i)
+
+
 def process_query(query):
 
     # if query == "dinosaurs":
@@ -62,10 +68,16 @@ def process_query(query):
     if "plus" in query:
         print(addition(get_list_of_number(query)))
         return addition(get_list_of_number(query))
+
     elif "largest" in query:
         return largest(get_list_of_number(query))
+
     elif "multiplied" in query:
         return product(get_list_of_number(query))
+
+    elif "square and cube" in query:
+        return square_cube(get_list_of_number(query))
+
     else:
         return "Query received"
 
