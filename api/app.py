@@ -49,14 +49,6 @@ def addition(nums):
 
 def process_query(query):
 
-<<<<<<< Updated upstream
-    if query == "dinosaurs":
-        return "Dinosaurs ruled the Earth 200 million years ago"
-    elif query == 'asteroids':
-        return "Unknown"
-    elif query == 'What is your name?':
-        return "Lisa_Jamie"
-=======
     # if query == "dinosaurs":
     #     return "Dinosaurs ruled the Earth 200 million years ago"
     # elif query == 'asteroids':
@@ -66,7 +58,6 @@ def process_query(query):
         return addition(get_list_of_number(query))
     elif 'largest' in query:
         return largest(get_list_of_number(query))
->>>>>>> Stashed changes
     else:
         return "Query received"
 
