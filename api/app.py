@@ -1,5 +1,4 @@
-
-
+import re
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -32,14 +31,42 @@ def checkout():
                            item=input_item, quantity=input_quantity)
 
 
+def get_list_of_number(query):
+    return [int(i) for i in re.findall(r'[0-9]+', query)]
+
+
+def largest(nums):
+    return max(nums)
+
+
+def smallest(nums):
+    return min(nums)
+
+
+def addition(nums):
+    return sum(nums)
+
+
 def process_query(query):
 
+<<<<<<< Updated upstream
     if query == "dinosaurs":
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif query == 'asteroids':
         return "Unknown"
     elif query == 'What is your name?':
         return "Lisa_Jamie"
+=======
+    # if query == "dinosaurs":
+    #     return "Dinosaurs ruled the Earth 200 million years ago"
+    # elif query == 'asteroids':
+    #     return "Unknown"
+
+    if 'plus' in query:
+        return addition(get_list_of_number(query))
+    elif 'largest' in query:
+        return largest(get_list_of_number(query))
+>>>>>>> Stashed changes
     else:
         return "Query received"
 
