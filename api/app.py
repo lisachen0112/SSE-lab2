@@ -70,16 +70,12 @@ def square_cube(nums):
 
 def prime(nums):
     for num in nums:
-        state = True
         if num <= 0:
-            state = False
-            return state
+            return str(num)
         else:
             for i in range(2, num):
                 if num % i == 0:
-                    state = False
-                    break
-            return state
+                    return str(num)
 
 
 def subtraction(nums):
