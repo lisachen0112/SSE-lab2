@@ -1,4 +1,5 @@
 import re
+import numpy as np
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -36,15 +37,19 @@ def get_list_of_number(query):
 
 
 def largest(nums):
-    return max(nums)
+    return str(max(nums))
 
 
 def smallest(nums):
-    return min(nums)
+    return str(min(nums))
 
 
 def addition(nums):
-    return sum(nums)
+    return str(sum(nums))
+
+
+def product(nums):
+    return str(np.prod(nums))
 
 
 def process_query(query):
@@ -55,9 +60,12 @@ def process_query(query):
     #     return "Unknown"
 
     if "plus" in query:
+        print(addition(get_list_of_number(query)))
         return addition(get_list_of_number(query))
     elif "largest" in query:
         return largest(get_list_of_number(query))
+    elif "multiplied" in query:
+        return product(get_list_of_number(query))
     else:
         return "Query received"
 
