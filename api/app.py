@@ -39,7 +39,7 @@ def process_query(query):
     elif query == 'asteroids':
         return "Unknown"
     else:
-        return
+        return "Query received"
 
 
 @app.route("/query", methods=["GET"])
