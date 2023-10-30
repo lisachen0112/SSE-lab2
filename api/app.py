@@ -68,14 +68,23 @@ def square_cube(nums):
             return str(i)
 
 
+def is_prime(num):
+    state = True
+    if num <= 0:
+        state = False
+        return state
+    else:
+        for i in range(2, num):
+            if num % i == 0:
+                state = False
+                break
+        return state
+
+
 def prime(nums):
     for num in nums:
-        if num <= 0:
+        if is_prime(num):
             return str(num)
-        else:
-            for i in range(2, num):
-                if num % i == 0:
-                    return str(num)
 
 
 def subtraction(nums):
