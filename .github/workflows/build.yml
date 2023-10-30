@@ -56,38 +56,38 @@ jobs:
         python-version: 3.9
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run coverage 
-      run: coverage run -m pytest api/*.py 
+    - name: Run coverage
+      run: coverage run -m pytest api/*.py
     - name: Coverage report
       run: coverage report > coverage.txt
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: my-artifact
-        path: coverage.txt     
+        path: coverage.txt
 
-  email-confirmation:
-    needs: [deploy-to-vercel, coverage-report]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: my-artifact
-          path: .
-      - name: Send-Mail
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: SSE Lab3 - Github Actions
-          to: rbc@imperial.ac.uk
-          from: Jamie Helsby
-          body: Build job of ${{github.repository}} completed successfully! Please find attached the coverage report. 
-          cc: jjh17@ic.ac.uk, lc1323@ic.ac.uk
-          ignore_cert: true
-          convert_markdown: true
-          attachments: coverage.txt
+#  email-confirmation:
+#    needs: [deploy-to-vercel, coverage-report]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Download Artifact
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: my-artifact
+#          path: .
+#      - name: Send-Mail
+#        uses: dawidd6/action-send-mail@v3
+#        with:
+#          server_address: smtp.gmail.com
+#          server_port: 465
+#          secure: true
+#          username: ${{secrets.MAIL_USERNAME}}
+#          password: ${{secrets.MAIL_PASSWORD}}
+#          subject: SSE Lab3 - Github Actions
+#          to: rbc@imperial.ac.uk
+#          from: Jamie Helsby
+#          body: Build job of ${{github.repository}} completed successfully! Please find attached the coverage report. 
+#          cc: jjh17@ic.ac.uk, lc1323@ic.ac.uk
+#          ignore_cert: true
+#          convert_markdown: true
+#          attachments: coverage.txt
