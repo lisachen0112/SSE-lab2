@@ -68,6 +68,24 @@ def square_cube(nums):
             return str(i)
 
 
+def prime(nums):
+    for num in nums:
+        state = True
+        if num <= 0:
+            state = False
+            return state
+        else:
+            for i in range(2, num):
+                if num % i == 0:
+                    state = False
+                    break
+            return state
+
+
+def subtraction(nums):
+    return str(nums[0] - nums[1])
+
+
 def process_query(query):
 
     # if query == "dinosaurs":
@@ -88,6 +106,11 @@ def process_query(query):
     elif "square and a cube" in query:
         return square_cube(get_list_of_number(query))
 
+    elif "prime" in query:
+        return prime(get_list_of_number(query))
+
+    elif "minus" in query:
+        return subtraction(get_list_of_number(query))
     else:
         return "Query received"
 

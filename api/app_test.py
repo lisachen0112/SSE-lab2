@@ -25,11 +25,9 @@ def test_get_list_of_number():
     assert get_list_of_number(query) == [73, 82, 15]
 
 
-def test_square_cube():
-
-    []
-    assert square_cube()
-
+# def test_square_cube():
+#     query = 'Which of the following is both a square and a cube: 335, 2641, 64, 576, 4569, 2639, 1728?'
+#     assert square_cube(query) ==
 
 
 # def test_largest():
