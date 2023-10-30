@@ -54,18 +54,12 @@ def product(nums):
 
 def is_cube(n):
     cube_root = n**(1./3.)
-    if round(cube_root) ** 3 == n:
-        return True
-    else:
-        return False
+    return round(cube_root) ** 3 == n
 
 
 def is_square(n):
     cube_root = n**(1./2.)
-    if round(cube_root) ** 2 == n:
-        return True
-    else:
-        return False
+    return round(cube_root) ** 2 == n
 
 
 def square_cube(nums):
@@ -91,7 +85,7 @@ def process_query(query):
     elif "multiplied" in query:
         return product(get_list_of_number(query))
 
-    elif "square and cube" in query:
+    elif "square and a cube" in query:
         return square_cube(get_list_of_number(query))
 
     else:

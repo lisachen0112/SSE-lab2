@@ -19,14 +19,16 @@ def test_knows_team_name():
 
 
 def test_get_list_of_number():
-    query = 'What is 22 plus 20'
+    query = 'What is 22 plus 20?'
     assert get_list_of_number(query) == [22, 20]
-    query = 'Which of the following numbers is the largest: 73, 82, 15'
+    query = 'Which of the following numbers is the largest: 73, 82, 15?'
     assert get_list_of_number(query) == [73, 82, 15]
 
-# def test_square_cube():
-#     []
-#     assert square_cube()
+
+def test_square_cube():
+
+    []
+    assert square_cube()
 
 
 
