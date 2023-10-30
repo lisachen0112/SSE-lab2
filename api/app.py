@@ -1,3 +1,5 @@
+
+
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -37,11 +39,12 @@ def process_query(query):
     elif query == 'asteroids':
         return "Unknown"
     else:
-	return
+        return
 
 
 @app.route("/query", methods=["GET"])
 def query_handler():
+
     query = request.args.get('q')
 
     return process_query(query)
