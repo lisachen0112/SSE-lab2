@@ -54,12 +54,10 @@ def process_query(query):
     # elif query == 'asteroids':
     #     return "Unknown"
 
-    if 'plus' in query:
+    if "plus" in query:
         return addition(get_list_of_number(query))
-    elif 'largest' in query:
+    elif "largest" in query:
         return largest(get_list_of_number(query))
-    elif "What" in query:
-        return "What was in the query"
     else:
         return "Query received"
 

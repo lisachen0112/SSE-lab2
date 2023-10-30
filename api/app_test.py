@@ -23,3 +23,4 @@ def test_get_list_of_number():
     assert get_list_of_number(query) == [22, 20]
     query = 'Which of the following numbers is the largest: 73, 82, 15'
     assert get_list_of_number(query) == [73, 82, 15]
+
