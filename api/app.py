@@ -32,6 +32,19 @@ def checkout():
                            item=input_item, quantity=input_quantity)
 
 
+@app.route("/github_api")
+def github_api():
+    return render_template("github_api.html")
+
+
+@app.route("/user_info", methods=["POST"])
+def user_info():
+
+    username = request.form.get("github-username")
+    
+    return render_template("user_info.html", username=username)
+
+
 def get_list_of_number(query):
     return [int(i) for i in re.findall(r'[0-9]+', query)]
 
