@@ -42,9 +42,9 @@ def github_api():
 def user_info():
 
     username = request.form.get("github-username")
-    get_user_data(username)
+    user_data = get_user_data(username)
     
-    return render_template("user_info.html", username=username)
+    return render_template("user_info.html", username=username, user_data=user_data)
 
 
 def get_user_data(username):
