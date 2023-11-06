@@ -1,5 +1,6 @@
 import re
 import numpy as np
+import requests
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -41,8 +42,33 @@ def github_api():
 def user_info():
 
     username = request.form.get("github-username")
+    get_user_data(username)
     
     return render_template("user_info.html", username=username)
+
+
+def get_user_data(username):
+    url = f"https://api.github.com/users/{username}/repos"
+
+    data = []
+
+    response = requests.get(url=url)
+    if response.status_code == 200:
+        repos = response.json()
+        for repo in repos:
+            repo_dict = {}
+            repo_dict["repo_name"] = repo["name"]
+            repo_dict["last_update"] = repo["updated_at"]
+            repo_dict["last_push"] = repo["pushed_at"]
+            data.append(repo_dict)
+            
+    return data
+
+            # print(f'{repo["full_name"]}: ')
+            # updated = repo["updated_at"]
+            # pushed = repo["pushed_at"]
+            # print(f'This repo was last updated at {updated}, with the last push at {pushed}\n')
+
 
 
 def get_list_of_number(query):
