@@ -42,33 +42,52 @@ def github_api():
 def user_info():
 
     username = request.form.get("github-username")
-    user_data = get_user_data(username)
+    data = gather_data(username)
     
-    return render_template("user_info.html", username=username, user_data=user_data)
+    return render_template("user_info.html", username=username, data=data)
 
 
-def get_user_data(username):
+# Function to gather a list of publically accessible repos of a given user
+def get_repos(username):
     url = f"https://api.github.com/users/{username}/repos"
-
-    data = []
-
-    response = requests.get(url=url)
+    response = requests.get(url)
     if response.status_code == 200:
-        repos = response.json()
-        for repo in repos:
-            repo_dict = {}
-            repo_dict["repo_name"] = repo["name"]
-            repo_dict["last_update"] = repo["updated_at"]
-            repo_dict["last_push"] = repo["pushed_at"]
-            data.append(repo_dict)
-            
+        return response.json()
+
+
+# Gathers the lastest commit data for a given repo
+def get_latest_commit(username, repo_name):
+    url = f"https://api.github.com/repos/{username}/{repo_name}/commits"
+    response = requests.get(url)
+    if response.status_code == 200:
+        commits = response.json()
+        if commits:
+            return commits[0]  # Return the latest commit
+    return None
+
+
+# Gather data for all repos of a given user
+def gather_data(username):
+    data = []
+    with requests.Session() as session:  # Use a Session for connection pooling
+        for repo in get_repos(username):
+            repo_data = {
+                "repo_name": repo["name"],
+                "last_update": repo["updated_at"],
+                "last_push": repo["pushed_at"]
+            }
+
+            latest_commit = get_latest_commit(username, repo["name"])
+            if latest_commit:
+                repo_data.update({
+                    "commit_hash": latest_commit["sha"],
+                    "commit_author": latest_commit["commit"]["author"]["name"],
+                    "commit_date": latest_commit["commit"]["author"]["date"],
+                    "commit_message": latest_commit["commit"]["message"]
+                })
+
+            data.append(repo_data)
     return data
-
-            # print(f'{repo["full_name"]}: ')
-            # updated = repo["updated_at"]
-            # pushed = repo["pushed_at"]
-            # print(f'This repo was last updated at {updated}, with the last push at {pushed}\n')
-
 
 
 def get_list_of_number(query):

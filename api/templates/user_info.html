@@ -3,17 +3,24 @@
 <p>Find below the information about your repositories</p>
 <table border="1">
     <tr>
-        {% for key in user_data[0].keys() %}
-            <th>{{ key }}</th>
+        {% for key in data[0].keys() %}
+            <th>{{ key.replace('_', ' ').title() }}</th> <!-- This will make the headers look nicer -->
         {% endfor %}
     </tr>
-    {% for row in user_data %}
+    {% for row in data %}
     <tr>
-        {% for value in row.values() %}
-            <td> {{ value }} </td>
+        {% for key, value in row.items() %}
+            {% if key == 'repo_name' %} <!-- Special handling for the repo name -->
+                <td>
+                    <a href="https://github.com/{{ username }}/{{ value }}" target="_blank">
+                        {{ value }}
+                    </a>
+                </td>
+            {% else %}
+                <td> {{ value }} </td>
+            {% endif %}
         {% endfor %}
     </tr>
     {% endfor %}
 </table>
-
 </body>
