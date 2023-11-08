@@ -43,40 +43,45 @@ def user_info():
 
     username = request.form.get("github-username")
     data = gather_data(username)
+    print(data)
     
     return render_template("user_info.html", username=username, data=data)
 
 
-# Function to gather a list of publically accessible repos of a given user
+# Function to gather a list of publicly accessible repos of a given user
 def get_repos(username):
     url = f"https://api.github.com/users/{username}/repos"
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
+    else:
+        return []
 
 
-# Gathers the lastest commit data for a given repo
+# Gathers the latest commit data for a given repo
 def get_latest_commit(username, repo_name):
     url = f"https://api.github.com/repos/{username}/{repo_name}/commits"
     response = requests.get(url)
     if response.status_code == 200:
         commits = response.json()
         if commits:
-            return commits[0]  # Return the latest commit
+            return commits[0]
     return None
 
 
 # Gather data for all repos of a given user
 def gather_data(username):
+    repos = get_repos(username)  # Get the list of repositories
     data = []
-    with requests.Session() as session:  # Use a Session for connection pooling
-        for repo in get_repos(username):
+    if repos:
+        for repo in repos:
             repo_data = {
                 "repo_name": repo["name"],
                 "last_update": repo["updated_at"],
                 "last_push": repo["pushed_at"]
             }
 
+            # Update each repository with additional commit data
             latest_commit = get_latest_commit(username, repo["name"])
             if latest_commit:
                 repo_data.update({

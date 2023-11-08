@@ -1,32 +1,38 @@
 <body>
 <h2>Hello {{ username }}</h2>
-<p>Find a list of you public repositories below:</p>
-<table border="1">
-    <tr>
-        {% for key in data[0].keys() %}
-            <th>{{ key.replace('_', ' ').title() }}</th> <!-- This will make the headers look nicer -->
-        {% endfor %}
-    </tr>
-    {% for row in data %}
-    <tr>
-        {% for key, value in row.items() %}
-            {% if key == 'repo_name' %} <!-- Special handling for the repo name -->
-                <td>
-                    <a href="https://github.com/{{ username }}/{{ value }}" target="_blank">
-                        {{ value }}
-                    </a>
-                </td>
-            {% elif key == 'commit_hash' %} <!-- Special handling for the repo name -->
+
+{% if data %}
+    <p>Find a list of your public repositories below:</p>
+    <table border="1">
+        <tr>
+            {% for key in data[0].keys() %}
+                <th>{{ key.replace('_', ' ').title() }}</th> <!-- This will make the headers look nicer -->
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for key, value in row.items() %}
+                {% if key == 'repo_name' %} <!-- Special handling for the repo name -->
                     <td>
-                        <a href="https://github.com/{{ username }}/{{ row['repo_name'] }}/commit/{{ value }}" target="_blank">
+                        <a href="https://github.com/{{ username }}/{{ value }}" target="_blank">
                             {{ value }}
                         </a>
                     </td>
-            {% else %}
-                <td> {{ value }} </td>
-            {% endif %}
+                {% elif key == 'commit_hash' %} <!-- Special handling for the commit hash -->
+                        <td>
+                            <a href="https://github.com/{{ username }}/{{ row['repo_name'] }}/commit/{{ value }}" target="_blank">
+                                {{ value }}
+                            </a>
+                        </td>
+                {% else %}
+                    <td>{{ value }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
-</table>
+    </table>
+{% else %}
+    <p>There are no public repositories for the user: "{{ username }}".</p>
+{% endif %}
+
 </body>
