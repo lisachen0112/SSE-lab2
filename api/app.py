@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
-from utils.maths_utils import *
-from utils.github_api_utils import *
+from utils.maths_utils import addition, largest, product, square_cube, \
+    prime, subtraction, get_list_of_number
+from utils.github_api_utils import gather_data, get_search_results
 app = Flask(__name__)
 
 
@@ -43,7 +44,7 @@ def user_info():
     username = request.form.get("github-username")
     data = gather_data(username)
     # print(data)
-    
+
     return render_template("user_info.html", username=username, data=data)
 
 
@@ -53,7 +54,8 @@ def search_results():
     search = request.form.get("search")
     data = get_search_results(search)
 
-    return render_template("repositories_search.html", search=search, data=data)
+    return render_template("repositories_search.html",
+                           search=search, data=data)
 
 
 def process_query(query):

@@ -1,4 +1,4 @@
-from app import process_query, get_list_of_number, largest, square_cube
+from app import process_query, get_list_of_number
 
 
 # def test_knows_about_dinosaurs():
@@ -26,7 +26,8 @@ def test_get_list_of_number():
 
 
 # def test_square_cube():
-#     query = 'Which of the following is both a square and a cube: 335, 2641, 64, 576, 4569, 2639, 1728?'
+#     query = 'Which of the following is both a square and a cube: 335, 2641, \
+#  64, 576, 4569, 2639, 1728?'
 #     assert square_cube(query) ==
 
 
