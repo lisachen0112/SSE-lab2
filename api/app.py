@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from api.utils.maths_utils import *
-from api.utils.github_api_utils import *
+from utils.maths_utils import *
+from utils.github_api_utils import *
 app = Flask(__name__)
 
 
