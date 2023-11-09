@@ -1,0 +1,28 @@
+<body>
+    <h2>Repository search engine</h2>
+    <p>Here are the top 10 starred repositories that match with your search "{{search}}:"</p>
+    {% if data %}
+    <table border="1">
+        <tr>
+            {% for key in data[0].keys() %}
+                <th>{{ key.replace('_', ' ').title() }}</th> <!-- This will make the headers look nicer -->
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for key, value in row.items() %}
+                {% if key == 'url' %} <!-- Special handling for the repo name -->
+                    <td>
+                        <a href={{ value }} target="_blank">Clone this repo</a>
+                    </td>
+                {% else %}
+                    <td>{{ value }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>There are no public repositories for the user: "{{ username }}".</p>
+{% endif %}
+</body>
