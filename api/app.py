@@ -91,3 +91,7 @@ def query_handler():
     query = request.args.get('q')
 
     return process_query(query)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+    
