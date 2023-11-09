@@ -93,5 +93,5 @@ def query_handler():
     return process_query(query)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run()
     
