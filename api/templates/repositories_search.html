@@ -1,7 +1,7 @@
 <body>
     <h2>Repository search engine</h2>
 {% if data %}
-    <p>Here are the top 10 starred repositories that match with your search "{{search}}:"</p>
+    <p>Here are the top 10 starred repositories that match with your search "{{search}}":</p>
     <table border="1">
         <tr>
             {% for key in data[0].keys() %}
