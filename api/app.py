@@ -1,7 +1,7 @@
-import re
-import numpy as np
-import requests
 from flask import Flask, render_template, request
+from utils.maths_utils import addition, largest, product, square_cube, \
+    prime, subtraction, get_list_of_number
+from utils.github_api_utils import gather_data, get_search_results
 app = Flask(__name__)
 
 
@@ -43,115 +43,19 @@ def user_info():
 
     username = request.form.get("github-username")
     data = gather_data(username)
-    print(data)
-    
+    # print(data)
+
     return render_template("user_info.html", username=username, data=data)
 
 
-# Function to gather a list of publicly accessible repos of a given user
-def get_repos(username):
-    url = f"https://api.github.com/users/{username}/repos"
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return []
+@app.route("/repository_search", methods=["POST"])
+def search_results():
 
+    search = request.form.get("search")
+    data = get_search_results(search)
 
-# Gathers the latest commit data for a given repo
-def get_latest_commit(username, repo_name):
-    url = f"https://api.github.com/repos/{username}/{repo_name}/commits"
-    response = requests.get(url)
-    if response.status_code == 200:
-        commits = response.json()
-        if commits:
-            return commits[0]
-    return None
-
-
-# Gather data for all repos of a given user
-def gather_data(username):
-    repos = get_repos(username)  # Get the list of repositories
-    data = []
-    if repos:
-        for repo in repos:
-            repo_data = {
-                "repo_name": repo["name"],
-                "last_update": repo["updated_at"],
-                "last_push": repo["pushed_at"]
-            }
-
-            # Update each repository with additional commit data
-            latest_commit = get_latest_commit(username, repo["name"])
-            if latest_commit:
-                repo_data.update({
-                    "commit_hash": latest_commit["sha"],
-                    "commit_author": latest_commit["commit"]["author"]["name"],
-                    "commit_date": latest_commit["commit"]["author"]["date"],
-                    "commit_message": latest_commit["commit"]["message"]
-                })
-
-            data.append(repo_data)
-    return data
-
-
-def get_list_of_number(query):
-    return [int(i) for i in re.findall(r'[0-9]+', query)]
-
-
-def largest(nums):
-    return str(max(nums))
-
-
-def smallest(nums):
-    return str(min(nums))
-
-
-def addition(nums):
-    return str(sum(nums))
-
-
-def product(nums):
-    return str(np.prod(nums))
-
-
-def is_cube(n):
-    cube_root = n**(1./3.)
-    return round(cube_root) ** 3 == n
-
-
-def is_square(n):
-    cube_root = n**(1./2.)
-    return round(cube_root) ** 2 == n
-
-
-def square_cube(nums):
-    for i in nums:
-        if (is_cube(i)) and (is_square(i)):
-            return str(i)
-
-
-def is_prime(num):
-    state = True
-    if num <= 0:
-        state = False
-        return state
-    else:
-        for i in range(2, num):
-            if num % i == 0:
-                state = False
-                break
-        return state
-
-
-def prime(nums):
-    for num in nums:
-        if is_prime(num):
-            return str(num)
-
-
-def subtraction(nums):
-    return str(nums[0] - nums[1])
+    return render_template("repositories_search.html",
+                           search=search, data=data)
 
 
 def process_query(query):
@@ -162,7 +66,7 @@ def process_query(query):
     #     return "Unknown"
 
     if "plus" in query:
-        print(addition(get_list_of_number(query)))
+        # print(addition(get_list_of_number(query)))
         return addition(get_list_of_number(query))
 
     elif "largest" in query:

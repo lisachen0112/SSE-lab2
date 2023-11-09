@@ -1,7 +1,16 @@
 <body>
+    <h2>List repositories by user</h2>
     <form action="/user_info" method="post">
         <label for="github-username">Username:</label>
         <input type="text" id="github-username" name="github-username" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Don't know what user to look up? Enter some key words below and discover the top 10 starred repositories matching your search!</h2>
+    <form action="/repository_search" method="post">
+        <label for="search">Enter your search:</label>
+        <input type="text" id="search" name="search" placeholder="public apis" required>
         <br>
         <input type="submit" value="Submit">
     </form>
