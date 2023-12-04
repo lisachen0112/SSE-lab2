@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
-from utils.maths_utils import addition, largest, product, square_cube, \
+from api.utils.maths_utils import addition, largest, product, square_cube, \
     prime, subtraction, get_list_of_number
-from utils.github_api_utils import gather_data, get_search_results
+from api.utils.github_api_utils import gather_data, get_search_results
 app = Flask(__name__)
 
 
